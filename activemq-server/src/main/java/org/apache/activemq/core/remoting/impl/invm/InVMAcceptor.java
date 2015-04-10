@@ -28,6 +28,7 @@ import org.apache.activemq.api.core.management.CoreNotificationType;
 import org.apache.activemq.core.security.ActiveMQPrincipal;
 import org.apache.activemq.core.server.ActiveMQComponent;
 import org.apache.activemq.core.server.ActiveMQMessageBundle;
+import org.apache.activemq.core.server.ActiveMQServerLogger;
 import org.apache.activemq.core.server.cluster.ClusterConnection;
 import org.apache.activemq.core.server.management.Notification;
 import org.apache.activemq.core.server.management.NotificationService;
@@ -64,6 +65,8 @@ public final class InVMAcceptor implements Acceptor
 
    private ActiveMQPrincipal defaultActiveMQPrincipal;
 
+   private final long connectionsAllowed;
+
    public InVMAcceptor(final ClusterConnection clusterConnection,
                        final Map<String, Object> configuration,
                        final BufferHandler handler,
@@ -81,6 +84,10 @@ public final class InVMAcceptor implements Acceptor
       id = ConfigurationHelper.getIntProperty(TransportConstants.SERVER_ID_PROP_NAME, 0, configuration);
 
       executorFactory = new OrderedExecutorFactory(threadPool);
+
+      connectionsAllowed = ConfigurationHelper.getLongProperty(TransportConstants.CONNECTIONS_ALLOWED,
+                                                               TransportConstants.DEFAULT_CONNECTIONS_ALLOWED,
+                                                               configuration);
    }
 
    public Map<String, Object> getConfiguration()
@@ -91,6 +98,16 @@ public final class InVMAcceptor implements Acceptor
    public ClusterConnection getClusterConnection()
    {
       return clusterConnection;
+   }
+
+   public long getConnectionsAllowed()
+   {
+      return connectionsAllowed;
+   }
+
+   public int getConnectionCount()
+   {
+      return connections.size();
    }
 
    public synchronized void start() throws Exception
@@ -209,11 +226,13 @@ public final class InVMAcceptor implements Acceptor
          throw new IllegalStateException("Acceptor is not started");
       }
 
+
       Listener connectionListener = new Listener(connector);
 
-      InVMConnection inVMConnection = new InVMConnection(id, connectionID, remoteHandler, connectionListener, clientExecutor, defaultActiveMQPrincipal);
+         InVMConnection inVMConnection = new InVMConnection(id, connectionID, remoteHandler, connectionListener, clientExecutor, defaultActiveMQPrincipal);
 
-      connectionListener.connectionCreated(this, inVMConnection, ActiveMQClient.DEFAULT_CORE_PROTOCOL);
+         connectionListener.connectionCreated(this, inVMConnection, ActiveMQClient.DEFAULT_CORE_PROTOCOL);
+
    }
 
    public void disconnect(final String connectionID)
