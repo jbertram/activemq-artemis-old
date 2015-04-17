@@ -28,6 +28,7 @@ import org.apache.activemq.core.security.Role;
 import org.apache.activemq.core.server.JournalType;
 import org.apache.activemq.core.server.group.impl.GroupingHandlerConfiguration;
 import org.apache.activemq.core.settings.impl.AddressSettings;
+import org.apache.activemq.core.settings.impl.ResourceLimitSettings;
 
 /**
  * A Configuration is used to configure ActiveMQ servers.
@@ -780,6 +781,21 @@ public interface Configuration
    Configuration setAddressesSettings(Map<String, AddressSettings> addressesSettings);
 
    Configuration addAddressesSetting(String key, AddressSettings addressesSetting);
+
+   /**
+    * @return usernames mapped to ResourceLimitSettings
+    */
+   Map<String, ResourceLimitSettings> getResourceLimitSettings();
+
+   /**
+    * @param resourceLimitSettings usernames mapped to ResourceLimitSettings
+    */
+   Configuration setResourceLimitSettings(Map<String, ResourceLimitSettings> resourceLimitSettings);
+
+   /**
+    * @param resourceLimitSettings usernames mapped to ResourceLimitSettings
+    */
+   Configuration addResourceLimitSettings(ResourceLimitSettings resourceLimitSettings);
 
    /**
     * @param roles a list of roles per matching

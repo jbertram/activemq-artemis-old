@@ -119,7 +119,7 @@ public class ProtonTest extends ServiceTestBase
 
       server.getConfiguration().getAcceptorConfigurations().add(transportConfiguration);
       server.start();
-      server.createQueue(new SimpleString(coreAddress), new SimpleString(coreAddress), null, true, false);
+      server.createQueue(new SimpleString(coreAddress), new SimpleString(coreAddress), null, null, true, false);
       server.createQueue(new SimpleString(coreAddress + "1"), new SimpleString(coreAddress + "1"), null, true, false);
       server.createQueue(new SimpleString(coreAddress + "2"), new SimpleString(coreAddress + "2"), null, true, false);
       server.createQueue(new SimpleString(coreAddress + "3"), new SimpleString(coreAddress + "3"), null, true, false);

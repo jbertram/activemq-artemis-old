@@ -17,7 +17,6 @@
 package org.apache.activemq.tests.integration.server;
 
 import org.apache.activemq.api.core.ActiveMQConnectionTimedOutException;
-import org.apache.activemq.api.core.ActiveMQException;
 import org.apache.activemq.api.core.ActiveMQNotConnectedException;
 import org.apache.activemq.api.core.TransportConfiguration;
 import org.apache.activemq.api.core.client.ClientSession;

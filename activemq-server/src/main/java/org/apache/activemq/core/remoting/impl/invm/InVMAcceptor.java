@@ -28,7 +28,6 @@ import org.apache.activemq.api.core.management.CoreNotificationType;
 import org.apache.activemq.core.security.ActiveMQPrincipal;
 import org.apache.activemq.core.server.ActiveMQComponent;
 import org.apache.activemq.core.server.ActiveMQMessageBundle;
-import org.apache.activemq.core.server.ActiveMQServerLogger;
 import org.apache.activemq.core.server.cluster.ClusterConnection;
 import org.apache.activemq.core.server.management.Notification;
 import org.apache.activemq.core.server.management.NotificationService;
@@ -229,9 +228,9 @@ public final class InVMAcceptor implements Acceptor
 
       Listener connectionListener = new Listener(connector);
 
-         InVMConnection inVMConnection = new InVMConnection(id, connectionID, remoteHandler, connectionListener, clientExecutor, defaultActiveMQPrincipal);
+      InVMConnection inVMConnection = new InVMConnection(id, connectionID, remoteHandler, connectionListener, clientExecutor, defaultActiveMQPrincipal);
 
-         connectionListener.connectionCreated(this, inVMConnection, ActiveMQClient.DEFAULT_CORE_PROTOCOL);
+      connectionListener.connectionCreated(this, inVMConnection, ActiveMQClient.DEFAULT_CORE_PROTOCOL);
 
    }
 
