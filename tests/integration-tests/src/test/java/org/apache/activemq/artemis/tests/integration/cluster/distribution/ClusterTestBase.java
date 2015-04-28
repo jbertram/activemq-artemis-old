@@ -2092,7 +2092,8 @@ public abstract class ClusterTestBase extends ServiceTestBase
          .setForwardWhenNoConsumers(forwardWhenNoConsumers)
          .setMaxHops(maxHops)
          .setConfirmationWindowSize(1024)
-         .setStaticConnectors(pairs);
+         .setStaticConnectors(pairs)
+         .setReconnectAttempts(25);
    }
 
    protected void setupClusterConnectionWithBackups(final String name,
