@@ -2157,12 +2157,13 @@ public abstract class ClusterTestBase extends ServiceTestBase
          .setName(name)
          .setAddress(address)
          .setConnectorName(name)
-         .setRetryInterval(100)
+         .setRetryInterval(1000)
          .setDuplicateDetection(true)
          .setForwardWhenNoConsumers(forwardWhenNoConsumers)
          .setMaxHops(maxHops)
          .setConfirmationWindowSize(1024)
-         .setDiscoveryGroupName(discoveryGroupName);
+         .setDiscoveryGroupName(discoveryGroupName)
+         .setReconnectAttempts(10);
       List<ClusterConnectionConfiguration> clusterConfs = conf.getClusterConfigurations();
 
       clusterConfs.add(clusterConf);
