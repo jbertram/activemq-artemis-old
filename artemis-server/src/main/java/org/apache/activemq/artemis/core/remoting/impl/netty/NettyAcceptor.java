@@ -572,8 +572,11 @@ public class NettyAcceptor implements Acceptor
 
       // Shutdown the EventLoopGroup if no new task was added for 100ms or if
       // 3000ms elapsed.
-      eventLoopGroup.shutdownGracefully(100, 3000, TimeUnit.MILLISECONDS);
-      eventLoopGroup = null;
+      if (eventLoopGroup != null)
+      {
+         eventLoopGroup.shutdownGracefully(100, 3000, TimeUnit.MILLISECONDS);
+         eventLoopGroup = null;
+      }
 
       channelClazz = null;
 
