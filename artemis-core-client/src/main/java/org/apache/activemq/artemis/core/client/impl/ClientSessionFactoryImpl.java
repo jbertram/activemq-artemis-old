@@ -903,9 +903,9 @@ public class ClientSessionFactoryImpl implements ClientSessionFactoryInternal, C
    {
       if (!clientProtocolManager.isAlive())
          return;
-      if (ActiveMQClientLogger.LOGGER.isTraceEnabled())
+//      if (ActiveMQClientLogger.LOGGER.isTraceEnabled())
       {
-         ActiveMQClientLogger.LOGGER.trace("getConnectionWithRetry::" + reconnectAttempts +
+         ActiveMQClientLogger.LOGGER.info("getConnectionWithRetry::" + reconnectAttempts +
                                              " with retryInterval = " +
                                              retryInterval +
                                              " multiplier = " +
@@ -918,9 +918,9 @@ public class ClientSessionFactoryImpl implements ClientSessionFactoryInternal, C
 
       while (clientProtocolManager.isAlive())
       {
-         if (ClientSessionFactoryImpl.isDebug)
+//         if (ClientSessionFactoryImpl.isDebug)
          {
-            ActiveMQClientLogger.LOGGER.debug("Trying reconnection attempt " + count + "/" + reconnectAttempts);
+            ActiveMQClientLogger.LOGGER.info("Trying reconnection attempt " + count + "/" + reconnectAttempts);
          }
 
          if (getConnection() != null)
